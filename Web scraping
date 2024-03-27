@@ -1,0 +1,23 @@
+from bs4 import BeautifulSoup
+import requests
+
+# URL da página que queremos fazer parsing
+url = 'https://ciasc.sc.gov.br'
+
+# Fazendo uma requisição GET para a página
+response = requests.get(url)
+
+# Verificando se a requisição foi bem-sucedida
+if response.status_code == 200:
+    # Obtendo o conteúdo HTML da página
+    html_content = response.content
+    
+    # Criando um objeto BeautifulSoup com o conteúdo HTML
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # Extraindo o título da página
+    title = soup.p
+    print('Título da página:', title)
+    
+    # Extraindo todos os links da página
+    links = soup.find_all('a')
